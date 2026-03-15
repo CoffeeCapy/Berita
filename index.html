@@ -3,67 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Warta Mandiri | Portal Berita Terpercaya</title>
+    <title>Warta Mandiri | Portal Berita</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root {
-            --primary: #c0392b;
-            --dark: #2c3e50;
-            --gray: #f4f4f4;
-        }
-
-        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background-color: var(--gray); color: #333; line-height: 1.6; }
+        :root { --primary: #c0392b; --dark: #2c3e50; --gray: #f4f4f4; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background-color: var(--gray); overflow-x: hidden; }
         
         /* HEADER */
-        header { background: white; border-bottom: 3px solid var(--primary); padding: 10px 20px; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .nav-container { max-width: 1100px; margin: auto; display: flex; justify-content: space-between; align-items: center; }
+        header { background: white; border-bottom: 3px solid var(--primary); padding: 10px 20px; position: sticky; top: 0; z-index: 1000; display: flex; justify-content: center; }
+        .nav-container { width: 100%; max-width: 1100px; display: flex; justify-content: space-between; align-items: center; }
         .logo { font-size: 24px; font-weight: bold; color: var(--primary); text-decoration: none; text-transform: uppercase; }
+        
+        /* MENU UTAMA (DESKTOP) */
         .nav-menu { display: flex; gap: 15px; list-style: none; margin: 0; padding: 0; }
-        .nav-menu a { text-decoration: none; color: var(--dark); font-weight: 500; font-size: 13px; }
-        .search-icon { cursor: pointer; color: var(--dark); font-size: 18px; }
+        .nav-menu a { text-decoration: none; color: var(--dark); font-weight: 500; font-size: 14px; }
 
-        /* TRENDING */
+        /* MOBILE SIDEBAR MENU */
+        .sidebar-menu { position: fixed; top: 0; left: -250px; width: 250px; height: 100%; background: var(--dark); transition: 0.3s; z-index: 2000; padding-top: 60px; }
+        .sidebar-menu a { padding: 15px 25px; text-decoration: none; font-size: 18px; color: white; display: block; border-bottom: 1px solid #3e4f5f; }
+        .sidebar-menu.active { left: 0; }
+        .overlay { position: fixed; display: none; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1500; }
+        .overlay.active { display: block; }
+        .close-btn { position: absolute; top: 10px; right: 20px; color: white; font-size: 30px; cursor: pointer; }
+
+        /* TOMBOL MENU GARIS 3 */
+        .menu-toggle { cursor: pointer; font-size: 20px; color: var(--dark); display: block; }
+
+        /* LAYOUT LAINNYA */
         .trending-bar { background: #fff; padding: 8px; border-bottom: 1px solid #ddd; font-size: 12px; }
-        .trending-content { max-width: 1100px; margin: auto; display: flex; align-items: center; }
-        .trending-label { background: var(--primary); color: white; padding: 2px 6px; border-radius: 3px; margin-right: 10px; font-weight: bold; }
-
-        /* LAYOUT */
         .main-container { max-width: 1100px; margin: 20px auto; display: grid; grid-template-columns: 2fr 1fr; gap: 25px; padding: 0 15px; }
-
-        /* HEADLINE */
-        .headline { position: relative; border-radius: 8px; overflow: hidden; margin-bottom: 25px; background: #000; }
-        .headline img { width: 100%; height: 380px; object-fit: cover; display: block; opacity: 0.8; }
-        .headline-overlay { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.9)); color: white; padding: 20px; }
-        .headline-overlay h2 { margin: 5px 0; font-size: 22px; }
-
-        /* NEWS LIST */
-        .category-title { border-left: 5px solid var(--primary); padding-left: 10px; margin: 20px 0 15px 0; font-size: 18px; text-transform: uppercase; }
-        .news-item { background: white; display: flex; gap: 15px; padding: 10px; border-radius: 5px; margin-bottom: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-        .news-item img { width: 120px; height: 85px; object-fit: cover; border-radius: 4px; }
-        .news-item-body h4 { margin: 0 0 5px 0; font-size: 15px; color: var(--dark); }
-        .news-item-body small { color: #888; }
-
-        /* ADS */
-        .ad-slot { background: #ebebeb; border: 1px dashed #bbb; text-align: center; padding: 15px; color: #999; margin-bottom: 20px; font-size: 12px; }
-
-        /* SIDEBAR POPULER */
-        .sidebar-list { list-style: none; padding: 0; margin: 0; }
-        .sidebar-list li { padding: 10px 0; border-bottom: 1px solid #ddd; font-size: 14px; display: flex; gap: 10px; }
-        .sidebar-list span { font-weight: bold; color: var(--primary); }
+        .headline { position: relative; border-radius: 8px; overflow: hidden; background: #000; }
+        .headline img { width: 100%; height: 380px; object-fit: cover; opacity: 0.8; }
+        .headline-overlay { position: absolute; bottom: 0; padding: 20px; color: white; }
+        .news-item { background: white; display: flex; gap: 15px; padding: 10px; border-radius: 5px; margin-bottom: 15px; }
+        .news-item img { width: 100px; height: 70px; object-fit: cover; border-radius: 4px; }
+        .ad-slot { background: #ebebeb; border: 1px dashed #bbb; text-align: center; padding: 15px; color: #999; margin-bottom: 20px; }
 
         @media (max-width: 768px) {
-            .main-container { grid-template-columns: 1fr; }
             .nav-menu { display: none; }
-            .headline img { height: 250px; }
+            .main-container { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
+<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+<div class="sidebar-menu" id="sidebar">
+    <span class="close-btn" onclick="toggleMenu()">&times;</span>
+    <a href="#">NASIONAL</a>
+    <a href="#">EKONOMI</a>
+    <a href="#">TEKNIK</a>
+    <a href="#">TIPS</a>
+    <a href="#">LOKAL</a>
+</div>
+
 <header>
     <div class="nav-container">
-        <div style="display: flex; align-items: center; gap: 10px;">
-            <i class="fas fa-bars"></i>
+        <div style="display: flex; align-items: center; gap: 15px;">
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
             <a href="#" class="logo">Warta<span>Mandiri</span></a>
         </div>
         <ul class="nav-menu">
@@ -77,9 +77,8 @@
 </header>
 
 <div class="trending-bar">
-    <div class="trending-content">
-        <span class="trending-label">TRENDING</span>
-        <marquee>Cara Membedakan Jenis Logam Bekas ... Peluang Usaha Ekstraksi Perak Skala Rumahan ... Harga Barang Bekas Hari Ini ...</marquee>
+    <div style="max-width: 1100px; margin: auto;">
+        <marquee>Peluang Bisnis Logam Bekas 2026 ... Teknik Urban Mining Rumahan ...</marquee>
     </div>
 </div>
 
@@ -88,46 +87,36 @@
         <div class="headline">
             <img src="https://images.unsplash.com/photo-1534067783941-51c9c23ecefd?w=800" alt="Headline">
             <div class="headline-overlay">
-                <small>TEKNIK • Baru Saja</small>
                 <h2>Strategi Ekstraksi Perak dari Limbah X-Ray untuk Pemula</h2>
             </div>
         </div>
 
         <div class="ad-slot">Iklan Google AdSense (Horizontal)</div>
 
-        <h3 class="category-title">Berita Terbaru</h3>
-        
+        <h3 style="border-left: 5px solid var(--primary); padding-left: 10px;">Berita Terbaru</h3>
         <div class="news-item">
             <img src="https://images.unsplash.com/photo-1504194104404-433180773017?w=400" alt="News">
-            <div class="news-item-body">
+            <div>
                 <h4>Cara Mengelola Keuangan Keluarga dengan Penghasilan Tambahan</h4>
-                <small>15 Maret 2026</small>
-            </div>
-        </div>
-
-        <div class="news-item">
-            <img src="https://images.unsplash.com/photo-1590001158193-7903d2427514?w=400" alt="News">
-            <div class="news-item-body">
-                <h4>Daftar Alat Keselamatan (APD) Wajib untuk Pengolah Logam</h4>
                 <small>15 Maret 2026</small>
             </div>
         </div>
     </main>
 
     <aside>
-        <h3 class="category-title">Populer</h3>
-        <ul class="sidebar-list">
-            <li><span>1.</span> Panduan Membedakan Aluminium dan Stainless</li>
-            <li><span>2.</span> Daftar Harga Tembaga Bekas Per Kilogram</li>
-            <li><span>3.</span> Cara Menabung Emas dari Hasil Barang Bekas</li>
-            <li><span>4.</span> Tips Membeli Cairan Kimia yang Aman</li>
-        </ul>
-
-        <div class="ad-slot" style="height: 250px; display: flex; align-items: center; justify-content: center;">
-            Iklan Sidebar
-        </div>
+        <h3 style="border-left: 5px solid var(--primary); padding-left: 10px;">Populer</h3>
+        <p>1. Panduan Membedakan Logam</p>
+        <p>2. Harga Tembaga Hari Ini</p>
+        <div class="ad-slot" style="height: 200px;">Iklan Sidebar</div>
     </aside>
 </div>
+
+<script>
+    function toggleMenu() {
+        document.getElementById('sidebar').classList.toggle('active');
+        document.getElementById('overlay').classList.toggle('active');
+    }
+</script>
 
 </body>
 </html>
