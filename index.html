@@ -7,53 +7,54 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --primary: #c0392b; /* Warna Merah Berita */
+            --primary: #c0392b;
             --dark: #2c3e50;
             --gray: #f4f4f4;
         }
 
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; background-color: var(--gray); color: #333; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background-color: var(--gray); color: #333; line-height: 1.6; }
         
-        /* HEADER & NAV */
+        /* HEADER */
         header { background: white; border-bottom: 3px solid var(--primary); padding: 10px 20px; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         .nav-container { max-width: 1100px; margin: auto; display: flex; justify-content: space-between; align-items: center; }
         .logo { font-size: 24px; font-weight: bold; color: var(--primary); text-decoration: none; text-transform: uppercase; }
-        .nav-menu { display: flex; gap: 20px; list-style: none; margin: 0; padding: 0; }
-        .nav-menu a { text-decoration: none; color: var(--dark); font-weight: 500; font-size: 14px; }
+        .nav-menu { display: flex; gap: 15px; list-style: none; margin: 0; padding: 0; }
+        .nav-menu a { text-decoration: none; color: var(--dark); font-weight: 500; font-size: 13px; }
         .search-icon { cursor: pointer; color: var(--dark); font-size: 18px; }
 
-        /* TRENDING BAR */
-        .trending-bar { background: #fff; padding: 10px; border-bottom: 1px solid #ddd; font-size: 13px; }
+        /* TRENDING */
+        .trending-bar { background: #fff; padding: 8px; border-bottom: 1px solid #ddd; font-size: 12px; }
         .trending-content { max-width: 1100px; margin: auto; display: flex; align-items: center; }
-        .trending-label { background: var(--primary); color: white; padding: 2px 8px; border-radius: 3px; margin-right: 15px; font-weight: bold; }
-        .trending-text { color: #555; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+        .trending-label { background: var(--primary); color: white; padding: 2px 6px; border-radius: 3px; margin-right: 10px; font-weight: bold; }
 
-        /* MAIN LAYOUT */
+        /* LAYOUT */
         .main-container { max-width: 1100px; margin: 20px auto; display: grid; grid-template-columns: 2fr 1fr; gap: 25px; padding: 0 15px; }
 
         /* HEADLINE */
-        .headline { position: relative; border-radius: 8px; overflow: hidden; margin-bottom: 25px; }
-        .headline img { width: 100%; height: 400px; object-fit: cover; display: block; }
-        .headline-overlay { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.8)); color: white; padding: 20px; }
-        .headline-overlay h2 { margin: 10px 0; font-size: 24px; }
+        .headline { position: relative; border-radius: 8px; overflow: hidden; margin-bottom: 25px; background: #000; }
+        .headline img { width: 100%; height: 380px; object-fit: cover; display: block; opacity: 0.8; }
+        .headline-overlay { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.9)); color: white; padding: 20px; }
+        .headline-overlay h2 { margin: 5px 0; font-size: 22px; }
 
-        /* CATEGORY SECTION */
-        .category-title { border-left: 5px solid var(--primary); padding-left: 10px; margin: 20px 0; font-size: 18px; text-transform: uppercase; }
-        .news-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .news-card { background: white; border-radius: 5px; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-        .news-card img { width: 100%; height: 150px; object-fit: cover; }
-        .news-card-body { padding: 12px; }
-        .news-card-body h4 { margin: 0 0 10px 0; font-size: 15px; line-height: 1.4; }
+        /* NEWS LIST */
+        .category-title { border-left: 5px solid var(--primary); padding-left: 10px; margin: 20px 0 15px 0; font-size: 18px; text-transform: uppercase; }
+        .news-item { background: white; display: flex; gap: 15px; padding: 10px; border-radius: 5px; margin-bottom: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .news-item img { width: 120px; height: 85px; object-fit: cover; border-radius: 4px; }
+        .news-item-body h4 { margin: 0 0 5px 0; font-size: 15px; color: var(--dark); }
+        .news-item-body small { color: #888; }
 
-        /* SLOT IKLAN */
-        .ad-slot { background: #ebebeb; border: 1px dashed #bbb; text-align: center; padding: 20px; color: #888; margin: 20px 0; font-size: 12px; }
-        .sidebar-ad { height: 250px; display: flex; align-items: center; justify-content: center; }
+        /* ADS */
+        .ad-slot { background: #ebebeb; border: 1px dashed #bbb; text-align: center; padding: 15px; color: #999; margin-bottom: 20px; font-size: 12px; }
 
-        /* RESPONSIVE */
+        /* SIDEBAR POPULER */
+        .sidebar-list { list-style: none; padding: 0; margin: 0; }
+        .sidebar-list li { padding: 10px 0; border-bottom: 1px solid #ddd; font-size: 14px; display: flex; gap: 10px; }
+        .sidebar-list span { font-weight: bold; color: var(--primary); }
+
         @media (max-width: 768px) {
             .main-container { grid-template-columns: 1fr; }
-            .nav-menu { display: none; } /* Sembunyikan menu di HP, bisa pakai Hamburger nanti */
-            .news-grid { grid-template-columns: 1fr; }
+            .nav-menu { display: none; }
+            .headline img { height: 250px; }
         }
     </style>
 </head>
@@ -61,77 +62,71 @@
 
 <header>
     <div class="nav-container">
-        <div style="display: flex; align-items: center; gap: 15px;">
-            <i class="fas fa-bars" style="font-size: 20px;"></i> <a href="#" class="logo">Warta<span>Mandiri</span></a>
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <i class="fas fa-bars"></i>
+            <a href="#" class="logo">Warta<span>Mandiri</span></a>
         </div>
         <ul class="nav-menu">
             <li><a href="#">NASIONAL</a></li>
             <li><a href="#">EKONOMI</a></li>
             <li><a href="#">TEKNIK</a></li>
             <li><a href="#">TIPS</a></li>
-            <li><a href="#">LOKAL</a></li>
         </ul>
-        <div class="search-icon">
-            <i class="fas fa-search"></i> </div>
+        <div class="search-icon"><i class="fas fa-search"></i></div>
     </div>
 </header>
 
 <div class="trending-bar">
     <div class="trending-content">
         <span class="trending-label">TRENDING</span>
-        <marquee class="trending-text">Peluang Bisnis Logam Bekas 2026 ... Tips Mengolah Limbah X-Ray Menjadi Perak ... Harga Komoditas Hari Ini ...</marquee>
+        <marquee>Cara Membedakan Jenis Logam Bekas ... Peluang Usaha Ekstraksi Perak Skala Rumahan ... Harga Barang Bekas Hari Ini ...</marquee>
     </div>
 </div>
 
 <div class="main-container">
-    
     <main>
         <div class="headline">
-            <img src="https://images.unsplash.com/photo-1504711432869-efd597cdd042?auto=format&fit=crop&w=800&q=80" alt="Headline">
+            <img src="https://images.unsplash.com/photo-1534067783941-51c9c23ecefd?w=800" alt="Headline">
             <div class="headline-overlay">
-                <small>EKONOMI • 5 Menit yang lalu</small>
-                <h2>Strategi Mengubah Barang Bekas Menjadi Sumber Penghasilan Utama</h2>
+                <small>TEKNIK • Baru Saja</small>
+                <h2>Strategi Ekstraksi Perak dari Limbah X-Ray untuk Pemula</h2>
             </div>
         </div>
 
         <div class="ad-slot">Iklan Google AdSense (Horizontal)</div>
 
         <h3 class="category-title">Berita Terbaru</h3>
-        <div class="news-grid">
-            <div class="news-card">
-                <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=400&q=80" alt="News">
-                <div class="news-card-body">
-                    <h4>Pentingnya Alat Pelindung Diri dalam Industri Rumahan</h4>
-                    <small>15 Maret 2026</small>
-                </div>
+        
+        <div class="news-item">
+            <img src="https://images.unsplash.com/photo-1504194104404-433180773017?w=400" alt="News">
+            <div class="news-item-body">
+                <h4>Cara Mengelola Keuangan Keluarga dengan Penghasilan Tambahan</h4>
+                <small>15 Maret 2026</small>
             </div>
-            <div class="news-card">
-                <img src="https://images.unsplash.com/photo-1454165833767-131f3696774d?auto=format&fit=crop&w=400&q=80" alt="News">
-                <div class="news-card-body">
-                    <h4>Cara Mengelola Keuangan Keluarga dengan Penghasilan Tak Tentu</h4>
-                    <small>14 Maret 2026</small>
-                </div>
+        </div>
+
+        <div class="news-item">
+            <img src="https://images.unsplash.com/photo-1590001158193-7903d2427514?w=400" alt="News">
+            <div class="news-item-body">
+                <h4>Daftar Alat Keselamatan (APD) Wajib untuk Pengolah Logam</h4>
+                <small>15 Maret 2026</small>
             </div>
         </div>
     </main>
 
     <aside>
         <h3 class="category-title">Populer</h3>
-        <ul style="list-style: none; padding: 0; font-size: 14px;">
-            <li style="margin-bottom: 15px; border-bottom: 1px solid #ddd; padding-bottom: 5px;">
-                <strong>1.</strong> Panduan Ekstraksi Logam Berharga untuk Pemula
-            </li>
-            <li style="margin-bottom: 15px; border-bottom: 1px solid #ddd; padding-bottom: 5px;">
-                <strong>2.</strong> Daftar Harga Barang Bekas Hari Ini
-            </li>
-            <li style="margin-bottom: 15px; border-bottom: 1px solid #ddd; padding-bottom: 5px;">
-                <strong>3.</strong> Tips Menabung bagi Guru Honorer
-            </li>
+        <ul class="sidebar-list">
+            <li><span>1.</span> Panduan Membedakan Aluminium dan Stainless</li>
+            <li><span>2.</span> Daftar Harga Tembaga Bekas Per Kilogram</li>
+            <li><span>3.</span> Cara Menabung Emas dari Hasil Barang Bekas</li>
+            <li><span>4.</span> Tips Membeli Cairan Kimia yang Aman</li>
         </ul>
 
-        <div class="ad-slot sidebar-ad">Iklan Banner (Square/Vertical)</div>
+        <div class="ad-slot" style="height: 250px; display: flex; align-items: center; justify-content: center;">
+            Iklan Sidebar
+        </div>
     </aside>
-
 </div>
 
 </body>
