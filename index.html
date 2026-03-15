@@ -3,76 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Warta Mandiri - Berita Terkini</title>
+    <title>Warta Mandiri | Portal Berita</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --detik-blue: #00468c; --detik-red: #c0392b; --gray-bg: #f0f2f5; }
-        body { font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; margin: 0; background-color: var(--gray-bg); color: #333; }
+        :root { --primary: #c0392b; --blue: #00468c; --dark: #2c3e50; --gray: #f8f9fa; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background-color: white; }
         
-        /* NAVBAR UTAMA */
-        header { background: white; border-bottom: 1px solid #ddd; padding: 10px 0; position: sticky; top: 0; z-index: 1000; }
-        .nav-container { max-width: 1100px; margin: auto; display: flex; justify-content: space-between; align-items: center; padding: 0 15px; }
-        .logo { font-size: 26px; font-weight: 800; color: var(--detik-blue); text-decoration: none; font-style: italic; }
-        .logo span { color: var(--detik-red); }
-        .menu-btn { cursor: pointer; font-size: 24px; color: var(--detik-blue); }
+        /* HEADER */
+        header { background: white; border-bottom: 1px solid #ddd; padding: 10px 20px; position: sticky; top: 0; z-index: 1000; display: flex; justify-content: center; }
+        .nav-container { width: 100%; max-width: 1100px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 24px; font-weight: bold; color: var(--primary); text-decoration: none; }
+        .menu-toggle { cursor: pointer; font-size: 22px; color: var(--blue); }
 
-        /* MENU LAYAR PENUH */
-        .full-menu { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; z-index: 2000; display: none; overflow-y: auto; }
-        .full-menu.active { display: block; }
-        .menu-header { padding: 15px 20px; border-bottom: 1px solid #ddd; display: flex; justify-content: space-between; align-items: center; }
-
-        /* KATEGORI HORIZONTAL */
-        .sub-nav { background: white; border-bottom: 1px solid #ddd; padding: 10px 0; overflow-x: auto; white-space: nowrap; }
-        .sub-nav-content { max-width: 1100px; margin: auto; padding: 0 15px; }
-        .sub-nav a { text-decoration: none; color: #555; font-size: 13px; font-weight: bold; margin-right: 20px; }
-
-        /* LAYOUT BERITA */
-        .container { max-width: 1100px; margin: 15px auto; padding: 0 15px; }
-        
-        /* BERITA UTAMA (BIG HERO) */
-        .hero-news { background: white; border-radius: 8px; overflow: hidden; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-        .hero-news img { width: 100%; height: auto; display: block; }
-        .hero-content { padding: 20px; }
-        .hero-content h1 { margin: 0 0 10px 0; font-size: 24px; line-height: 1.3; color: #222; }
-
-        /* GRID BERITA KECIL */
-        .news-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; }
-        .grid-item { background: white; border-radius: 4px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-        .grid-item img { width: 100%; height: 100px; object-fit: cover; }
-        .grid-item h3 { font-size: 13px; margin: 8px; line-height: 1.4; height: 55px; overflow: hidden; }
-
-        /* IKLAN MELAYANG (OPASIONAL) */
-        .floating-ad { background: #fff9c4; padding: 10px; text-align: center; font-size: 12px; border-top: 2px solid #fbc02d; margin-top: 20px; }
-
-        @media (max-width: 600px) {
-            .hero-content h1 { font-size: 18px; }
-            .news-grid { grid-template-columns: repeat(2, 1fr); }
+        /* FULLSCREEN MENU (DETIK STYLE) */
+        .menu-overlay { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: white; z-index: 2000; overflow-y: auto;
+            display: none; padding-bottom: 50px;
         }
+        .menu-overlay.active { display: block; }
+        .menu-header { 
+            padding: 15px 20px; border-bottom: 1px solid #ddd; 
+            display: flex; justify-content: space-between; align-items: center; 
+            position: sticky; top: 0; background: white;
+        }
+        .close-menu { font-size: 28px; color: var(--primary); cursor: pointer; }
+
+        /* MENU CONTENT */
+        .menu-content { max-width: 1100px; margin: auto; padding: 20px; }
+        .user-section { display: flex; align-items: center; gap: 10px; padding-bottom: 20px; border-bottom: 1px solid #eee; margin-bottom: 20px; }
+        .user-icon { font-size: 40px; color: #ccc; }
+        
+        .grid-menu { 
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; 
+            margin-bottom: 30px;
+        }
+        .section-title { font-weight: bold; font-size: 16px; margin-bottom: 15px; display: block; color: #333; }
+        .menu-item { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #555; font-size: 14px; }
+        .menu-item i { width: 20px; text-align: center; }
+        
+        /* WARNA IKON */
+        .i-news { color: #e74c3c; } .i-finance { color: #27ae60; }
+        .i-tech { color: #2980b9; } .i-sport { color: #f39c12; }
+        .i-health { color: #2ecc71; } .i-food { color: #e67e22; }
+
+        /* CONTENT LAINNYA */
+        .main-container { max-width: 1100px; margin: 20px auto; padding: 0 15px; }
+        .headline img { width: 100%; border-radius: 8px; }
     </style>
 </head>
 <body>
 
-<div class="full-menu" id="fullMenu">
+<div class="menu-overlay" id="menuOverlay">
     <div class="menu-header">
-        <div class="logo">Warta<span>Mandiri</span></div>
-        <div class="menu-btn" onclick="toggleMenu()">&times;</div>
-    </div>
-    <div style="padding: 20px;">
-        <h4 style="color: var(--detik-blue); border-bottom: 2px solid var(--detik-blue); padding-bottom: 5px;">Kategori Berita</h4>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px;">
-            <a href="#" style="text-decoration:none; color:#333;"><i class="fas fa-bolt" style="color:orange;"></i> WartaNews</a>
-            <a href="#" style="text-decoration:none; color:#333;"><i class="fas fa-laptop-code" style="color:blue;"></i> WartaTeknik</a>
-            <a href="#" style="text-decoration:none; color:#333;"><i class="fas fa-chart-line" style="color:green;"></i> WartaFinance</a>
-            <a href="#" style="text-decoration:none; color:#333;"><i class="fas fa-medkit" style="color:red;"></i> WartaHealth</a>
-        </div>
-    </div>
-</div>
-
-<header>
-    <div class="nav-container">
-        <div class="menu-btn" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
         <a href="#" class="logo">Warta<span>Mandiri</span></a>
-        <div class="menu-btn"><i class="fas fa-search"></i></div>
+        <div class="close-menu" onclick="toggleMenu()">&times;</div>
     </div>
     
     <div class="menu-content">
@@ -125,45 +110,27 @@
             <i class="far fa-user"></i>
         </div>
     </div>
+</header>
 
-<div class="container">
-    <div class="hero-news">
-        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800" alt="Headline">
-        <div class="hero-content">
-            <small style="color: var(--detik-red); font-weight: bold;">TEKNIK</small>
-            <h1>Rahasia Ekstraksi Perak Skala Rumahan: Modal Kecil Hasil Maksimal</h1>
-            <small color="#888">15 Maret 2026</small>
-        </div>
+<div class="main-container">
+    <div class="headline">
+        <img src="https://images.unsplash.com/photo-1534067783941-51c9c23ecefd?w=800" alt="Headline">
+        <h2>Strategi Ekstraksi Perak dari Limbah X-Ray untuk Pemula</h2>
     </div>
-
-    <h4 style="border-bottom: 2px solid #ddd; padding-bottom: 10px; margin-bottom: 15px;">Berita Terbaru</h4>
-    <div class="news-grid">
-        <div class="grid-item">
-            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=400">
-            <h3>Cara Menggunakan APD yang Benar Saat Olah Limbah</h3>
-        </div>
-        <div class="grid-item">
-            <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=400">
-            <h3>Update Harga Logam Hari Ini: Tembaga Naik Drastis</h3>
-        </div>
-        <div class="grid-item">
-            <img src="https://images.unsplash.com/photo-1454165833767-131f3696774d?w=400">
-            <h3>Tips Atur Keuangan dari Hasil Usaha Sampingan</h3>
-        </div>
-        <div class="grid-item">
-            <img src="https://images.unsplash.com/photo-1512418490979-92798ccc1380?w=400">
-            <h3>Kenali Jenis Film X-Ray yang Mengandung Banyak Perak</h3>
-        </div>
-    </div>
-
-    <div class="floating-ad">
-        Iklan Google AdSense akan muncul di sini
-    </div>
+    <hr>
+    <p>Klik tombol garis 3 di pojok kiri atas untuk melihat menu kategori lengkap seperti Detikcom.</p>
 </div>
 
 <script>
     function toggleMenu() {
-        document.getElementById('fullMenu').classList.toggle('active');
+        const menu = document.getElementById('menuOverlay');
+        if (menu.classList.contains('active')) {
+            menu.classList.remove('active');
+            document.body.style.overflow = 'auto'; // Layar bisa scroll lagi
+        } else {
+            menu.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Layar tidak bisa scroll saat menu buka
+        }
     }
 </script>
 
