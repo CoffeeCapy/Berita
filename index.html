@@ -52,29 +52,50 @@
 </head>
 <body>
 
-<div class="full-menu" id="fullMenu">
+<div class="menu-overlay" id="menuOverlay">
     <div class="menu-header">
-        <div class="logo">Warta<span>Mandiri</span></div>
-        <div class="menu-btn" onclick="toggleMenu()">&times;</div>
+        <a href="#" class="logo">Warta<span>Mandiri</span></a>
+        <div class="close-menu" onclick="toggleMenu()">&times;</div>
     </div>
-    <div style="padding: 20px;">
-        <h4 style="color: var(--detik-blue); border-bottom: 2px solid var(--detik-blue); padding-bottom: 5px;">Kategori Berita</h4>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px;">
-            <a href="#" style="text-decoration:none; color:#333;"><i class="fas fa-bolt" style="color:orange;"></i> WartaNews</a>
-            <a href="#" style="text-decoration:none; color:#333;"><i class="fas fa-laptop-code" style="color:blue;"></i> WartaTeknik</a>
-            <a href="#" style="text-decoration:none; color:#333;"><i class="fas fa-chart-line" style="color:green;"></i> WartaFinance</a>
-            <a href="#" style="text-decoration:none; color:#333;"><i class="fas fa-medkit" style="color:red;"></i> WartaHealth</a>
+    
+    <div class="menu-content">
+        <div class="user-section">
+            <i class="fas fa-user-circle user-icon"></i>
+            <div>
+                <span style="font-size: 12px; color: #888;">Halo Pembaca</span><br>
+                <strong style="color: var(--blue);">Masuk / Daftar</strong>
+            </div>
+        </div>
+
+        <span class="section-title">Kategori Berita</span>
+        <div class="grid-menu">
+            <a href="#" class="menu-item"><i class="fas fa-newspaper i-news"></i> WartaNews</a>
+            <a href="#" class="menu-item"><i class="fas fa-chart-line i-finance"></i> WartaFinance</a>
+            <a href="#" class="menu-item"><i class="fas fa-microchip i-tech"></i> WartaTeknik</a>
+            <a href="#" class="menu-item"><i class="fas fa-dumbbell i-sport"></i> WartaSport</a>
+            <a href="#" class="menu-item"><i class="fas fa-heartbeat i-health"></i> WartaHealth</a>
+            <a href="#" class="menu-item"><i class="fas fa-utensils i-food"></i> WartaFood</a>
+        </div>
+
+        <span class="section-title">Daerah</span>
+        <div class="grid-menu">
+            <a href="#" class="menu-item"><i class="fas fa-map-marker-alt" style="color:#95a5a6;"></i> Jawa Tengah</a>
+            <a href="#" class="menu-item"><i class="fas fa-map-marker-alt" style="color:#95a5a6;"></i> Jawa Timur</a>
+            <a href="#" class="menu-item"><i class="fas fa-map-marker-alt" style="color:#95a5a6;"></i> Jawa Barat</a>
+            <a href="#" class="menu-item"><i class="fas fa-map-marker-alt" style="color:#95a5a6;"></i> Sulawesi</a>
+        </div>
+
+        <span class="section-title">Layanan & Tagihan</span>
+        <div class="grid-menu">
+            <a href="#" class="menu-item"><i class="fas fa-gamepad"></i> Game</a>
+            <a href="#" class="menu-item"><i class="fas fa-mobile-alt"></i> Paket Data</a>
+            <a href="#" class="menu-item"><i class="fas fa-bolt"></i> Token PLN</a>
+            <a href="#" class="menu-item"><i class="fas fa-wallet"></i> E-Wallet</a>
         </div>
     </div>
 </div>
 
 <header>
-    <div class="nav-container">
-        <div class="menu-btn" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
-        <a href="#" class="logo">Warta<span>Mandiri</span></a>
-        <div class="menu-btn"><i class="fas fa-search"></i></div>
-    </div>
-</header>
 
 <div class="sub-nav">
     <div class="sub-nav-content">
